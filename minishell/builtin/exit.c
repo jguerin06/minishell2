@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 10:47:08 by jguerin           #+#    #+#             */
-/*   Updated: 2024/01/31 14:45:40 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/04/25 11:05:08 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	exit_value(int n, char *str, t_shell *shell)
 	{
 		ft_putstr_fd("numeric argument required\n", 2);
 		shell->mini = 0;
-		shell->status = 255;
+		shell->status = 2;
 	}
 	else if (n == 2)
 	{

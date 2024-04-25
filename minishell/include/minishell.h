@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 10:22:01 by jguerin           #+#    #+#             */
-/*   Updated: 2024/04/25 09:19:31 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/04/25 12:56:19 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,8 @@ char		**ft_split(char const *s, char c);
 
 int			ft_checkenv(char *str, char **env);
 int			ft_checkenv2(char *str, char **env);
+int			env_len(char **tab);
+char		**add_env(char **env, char *var);
 char		*ft_getenv(char *str, char **env);
 void		sort_env(char **tab, int env_len);
 
@@ -164,6 +166,7 @@ void		sort_env(char **tab, int env_len);
 
 int			basic(int argc, char **env, t_shell *shell);
 int			char_cmp(char *str, char *reject);
+int			format_check(char *arg, t_shell *shell);
 int			nb_arg(char **arg);
 int			is_flag_valid(char *str);
 int			is_d(int n);

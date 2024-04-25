@@ -27,5 +27,101 @@ pwd -> echo -> exit -> cd -> export / unset
 
 PS : 🎉 Bon courage 🎉 Force a toi 🎉 Stresse pas 🎉
 
+==================================================================================================================
 
-Trouver comment comparer 2 str jusqu'a un certain caractere donner 
+
+Liste des tests effectues :
+
+echo : 
+- echo = newline
+- echo lol = lol
+- echo "lol" = "lol"
+- echo 'lol' = 'lol'
+- echo 'lol = quote error
+- echo lol' = quote error
+- echo "lol = quote error
+- echo lol" = quote error
+- echo "'lol' ca va" = "'lol' ca va"
+
+env :
+- env 
+
+cd :
+- test changer de directory
+- cd home apres l'avoir unset = HOME not set 
+- cd test lol = too many arguments
+
+pwd :
+- pwd
+
+export :
+- export = affiche bien tout
+- export caca=69 = affichage correct
+- export caca=42 = valeur bien modifiee
+- export 5lol = invalid identifier
+- export @pate=8 = invalid identifier
+- export export a=1 b=2 c=3 = fonctionne
+- export 4e=10 f=5 = invalid identifier mais fonctionne quand meme pour f=5
+
+unset :
+- unset ZSH = fonctionne
+- unset ZSH ZDOTDIR = fonctionne
+- unset un truc qui existe pas = fonctionne
+
+
+
+==================================================================================================================
+
+leaks : 
+
+valgrind ./minishell puis exit
+
+==379640== 
+==379640== HEAP SUMMARY:
+==379640==     in use at exit: 208,221 bytes in 225 blocks
+==379640==   total heap usage: 536 allocs, 311 frees, 238,512 bytes allocated
+==379640== 
+==379640== LEAK SUMMARY:
+==379640==    definitely lost: 0 bytes in 0 blocks
+==379640==    indirectly lost: 0 bytes in 0 blocks
+==379640==      possibly lost: 0 bytes in 0 blocks
+==379640==    still reachable: 208,221 bytes in 225 blocks
+==379640==         suppressed: 0 bytes in 0 blocks
+
+valgrind ./minishell puis unset Home puis exit  ❌
+
+==382165== 
+==382165== HEAP SUMMARY:
+==382165==     in use at exit: 213,513 bytes in 315 blocks
+==382165==   total heap usage: 761 allocs, 446 frees, 257,812 bytes allocated
+==382165== 
+==382165== LEAK SUMMARY:
+==382165==    definitely lost: 680 bytes in 1 blocks
+==382165==    indirectly lost: 4,525 bytes in 83 blocks
+==382165==      possibly lost: 0 bytes in 0 blocks
+==382165==    still reachable: 208,308 bytes in 231 blocks
+==382165==         suppressed: 0 bytes in 0 blocks
+==382165== Rerun with --leak-check=full to see details of leaked memory
+==382165== 
+==382165== Use --track-origins=yes to see where uninitialised values come from
+==382165== For lists of detected and suppressed errors, rerun with: -s
+==382165== ERROR SUMMARY: 134 errors from 25 contexts (suppressed: 0 from 0)
+
+valgrind ./minishell puis cd, cd Desktop puis exit  ❌
+
+==385303== 
+==385303== HEAP SUMMARY:
+==385303==     in use at exit: 208,318 bytes in 232 blocks
+==385303==   total heap usage: 611 allocs, 379 frees, 280,445 bytes allocated
+==385303== 
+==385303== LEAK SUMMARY:
+==385303==    definitely lost: 14 bytes in 1 blocks
+==385303==    indirectly lost: 0 bytes in 0 blocks
+==385303==      possibly lost: 0 bytes in 0 blocks
+==385303==    still reachable: 208,304 bytes in 231 blocks
+==385303==         suppressed: 0 bytes in 0 blocks
+==385303== Rerun with --leak-check=full to see details of leaked memory
+==385303== 
+==385303== Use --track-origins=yes to see where uninitialised values come from
+==385303== For lists of detected and suppressed errors, rerun with: -s
+==385303== ERROR SUMMARY: 97 errors from 23 contexts (suppressed: 0 from 0)

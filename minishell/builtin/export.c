@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:26:51 by jguerin           #+#    #+#             */
-/*   Updated: 2024/04/24 16:59:44 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/04/25 12:55:06 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	char_cmp(char *str, char *reject)
 	return (0);
 }
 
-static int	format_check(char *arg, t_shell *shell)
+int	format_check(char *arg, t_shell *shell)
 {
 	int	current;
 	int	flag;
@@ -52,7 +52,7 @@ static int	format_check(char *arg, t_shell *shell)
 		return (1);
 }
 
-static int	env_len(char **tab)
+int	env_len(char **tab)
 {
 	int	i;
 
@@ -62,7 +62,7 @@ static int	env_len(char **tab)
 	return (i);
 }
 
-static char	**add_env(char **env, char *var)
+char	**add_env(char **env, char *var)
 {
 	int		i;
 	char	**new;

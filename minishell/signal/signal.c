@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 12:42:54 by mbouaza           #+#    #+#             */
-/*   Updated: 2024/04/25 08:10:11 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/04/25 10:34:49 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,14 @@ static void	ctrl_c(int plop)
 	return ;
 }
 
-static __sighandler_t	ctrl_backslash(void)
+static void	nothing(void)
 {
 	return ;
+}
+
+static __sighandler_t	ctrl_backslash(void)
+{
+	nothing();
 }
 
 void	build_signal(void)
