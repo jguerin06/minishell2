@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouaza <mbouaza@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 05:31:43 by mbouaza           #+#    #+#             */
-/*   Updated: 2023/11/10 05:37:51 by mbouaza          ###   ########.fr       */
+/*   Updated: 2024/04/25 08:16:01 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int tokenizer(char *token)
+int	tokenizer(char *token)
 {
 	if (ft_strcmp(token, "|"))
 		return (1);

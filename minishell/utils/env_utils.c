@@ -6,16 +6,16 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 22:53:47 by mbouaza           #+#    #+#             */
-/*   Updated: 2024/03/16 14:10:30 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/04/24 17:25:09 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char *ft_getenv(char *str, char **env)
+char	*ft_getenv(char *str, char **env)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -30,7 +30,7 @@ char *ft_getenv(char *str, char **env)
 					return (ft_substr(env[i], j + 1, ft_strlen(env[i])));
 			}
 			else
-				break;
+				break ;
 		}
 		i++;
 		j = 0;
@@ -38,10 +38,10 @@ char *ft_getenv(char *str, char **env)
 	return (NULL);
 }
 
-int ft_checkenv(char *str, char **env)
+int	ft_checkenv(char *str, char **env)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -56,7 +56,7 @@ int ft_checkenv(char *str, char **env)
 					return (i);
 			}
 			else
-				break;
+				break ;
 		}
 		i++;
 		j = 0;
@@ -64,10 +64,37 @@ int ft_checkenv(char *str, char **env)
 	return (-1);
 }
 
-static void print_sorted_env(char **tab, int i)
+int	ft_checkenv2(char *str, char **env)
 {
-	int j;
-	int flag;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (env[i])
+	{
+		while (str[j] && env[i][j])
+		{
+			if (str[j] == env[i][j])
+			{
+				if (str[j] && env[i][j + 1] && env[i][j + 1] == '=' &&
+					str[j + 1] == '\0')
+					return (i);
+				j++;
+			}
+			else
+				break ;
+		}
+		i++;
+		j = 0;
+	}
+	return (-1);
+}
+
+static void	print_sorted_env(char **tab, int i)
+{
+	int	j;
+	int	flag;
 
 	((void)0, j = -1, flag = 0);
 	while (tab[++j])
@@ -93,14 +120,12 @@ static void print_sorted_env(char **tab, int i)
 	}
 }
 
-
-
 void	sort_env(char **tab, int env_len)
 {
 	int		i;
 	int		ordered;
 	char	*tmp;
-	
+
 	ordered = 0;
 	i = 0;
 	while (tab[i] && ordered == 0)
@@ -123,23 +148,3 @@ void	sort_env(char **tab, int env_len)
 	}
 	print_sorted_env(tab, -1);
 }
-/*
-void	sort_env(char **tab, int env_len)
-{
-	char *tmp;
-
-	for (int i = 0; i < env_len - 1; i++)
-	{
-		for (int j = 0; j < env_len - 1 - i; j++)
-		{
-			if(ft_strcmp(tab[j], tab[j + 1]) > 0)
-			{
-				strcpy(tmp, tab[j]);
-				strcpy(tab[j], tab[j + 1]);
-				strcpy(tab[j + 1], tmp);
-			}
-		}
-		test(tab);
-	}
-}
-*/

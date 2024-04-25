@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 22:47:18 by mbouaza           #+#    #+#             */
-/*   Updated: 2023/12/22 06:08:08 by marvin           ###   ########.fr       */
+/*   Updated: 2024/04/25 08:06:56 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void shell_execve(char *e_cmd, char **env, t_shell *shell)
+void	shell_execve(char *e_cmd, char **env, t_shell *shell)
 {
-	int i;
-	char *str;
-	char *cpy;
-	char **bash;
+	int		i;
+	char	*str;
+	char	*cpy;
+	char	**bash;
 
 	i = 0;
 	cpy = NULL;

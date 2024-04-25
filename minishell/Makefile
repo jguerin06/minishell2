@@ -11,8 +11,10 @@ SRCS = 	main.c \
 		builtin/exit.c \
 		builtin/ft_cd.c \
 		builtin/export.c \
+		builtin/unset.c \
 		utils/path.c \
 		utils/basic_check.c \
+		utils/basic_check2.c \
 		utils/print_type.c \
 		utils/init_struct.c \
 		utils/copy.c \

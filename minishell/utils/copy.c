@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouaza <mbouaza@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:00:03 by mbouaza           #+#    #+#             */
-/*   Updated: 2023/11/06 18:27:23 by mbouaza          ###   ########.fr       */
+/*   Updated: 2024/04/25 07:59:16 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	*ft_strdup(char *s1)
 
 char	**ft_tabdup(char **tab)
 {
-	int i;
-	char 	**newtab;
+	int		i;
+	char	**newtab;
 
 	i = 0;
 	newtab = NULL;
@@ -44,7 +44,7 @@ char	**ft_tabdup(char **tab)
 	if (!newtab)
 		return (NULL);
 	i = 0;
-	while (tab[i] && tab[i + 1])
+	while (tab[i])
 	{
 		newtab[i] = ft_strdup(tab[i]);
 		i++;

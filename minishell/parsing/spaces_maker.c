@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spaces_maker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouaza <mbouaza@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 02:22:07 by mbouaza           #+#    #+#             */
-/*   Updated: 2024/02/14 15:06:34 by mbouaza          ###   ########.fr       */
+/*   Updated: 2024/04/25 08:40:25 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // norme
 
-static int spaced_verif(char *readed, int i)
+static int	spaced_verif(char *readed, int i)
 {
 	if (readed[i] == '|' && readed[i + 1] != '|')
 		return (1);
@@ -43,17 +43,17 @@ static int spaced_verif(char *readed, int i)
 	return (0);
 }
 
-static int rebuild_space_len(char *readed, int i)
+static int	rebuild_space_len(char *readed, int i)
 {
-	int j;
-	int in_q;
+	int	j;
+	int	in_q;
 
 	j = 0;
 	in_q = 0;
 	while (readed[i])
 	{
 		if (readed[j] && spaced_verif(readed, i))
-				((void)0, i++, j++);
+			((void)0, i++, j++);
 		else if (update(readed[i], &in_q))
 		{
 			i++;
@@ -62,17 +62,17 @@ static int rebuild_space_len(char *readed, int i)
 			i++;
 		}
 		else
-				i++;
+			i++;
 	}
 	return (i + j);
 }
 
 // norm
 
-char *rebuild_space_line(char *readed, int j, int in_q)
+char	*rebuild_space_line(char *readed, int j, int in_q)
 {
-	int i;
-	char *new;
+	int		i;
+	char	*new;
 
 	new = malloc(sizeof(char) * (rebuild_space_len(readed, 0) + 1));
 	i = 0;

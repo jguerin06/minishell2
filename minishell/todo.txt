@@ -13,11 +13,11 @@ Julien :
 - echo : true
 - env : true
 - exit : true
-- cd : WIP
+- cd : true
 - pwd : true
-- export : false
-- unset : false
-- signal ^C + ^\ : false
+- export : true
+- unset : true
+- signal ^C + ^\ : 50%
 
 
 
@@ -26,3 +26,6 @@ Julien :
 pwd -> echo -> exit -> cd -> export / unset
 
 PS : 🎉 Bon courage 🎉 Force a toi 🎉 Stresse pas 🎉
+
+
+Trouver comment comparer 2 str jusqu'a un certain caractere donner 

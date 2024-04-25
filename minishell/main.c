@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouaza <mbouaza@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:57:04 by mbouaza           #+#    #+#             */
-/*   Updated: 2024/03/05 12:53:47 by mbouaza          ###   ########.fr       */
+/*   Updated: 2024/04/25 09:42:36 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell.h"
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
-	int status;
-	t_shell *shell;
+	int		status;
+	t_shell	*shell;
 
 	status = 0;
 	shell = malloc(sizeof(t_shell));

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 18:11:54 by mbouaza           #+#    #+#             */
-/*   Updated: 2024/01/05 12:09:48 by marvin           ###   ########.fr       */
+/*   Updated: 2024/04/24 17:22:25 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void tab_free(char **tab)
+void	tab_free(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab && tab[i])
@@ -23,7 +23,7 @@ void tab_free(char **tab)
 		free(tab);
 }
 
-void global_free(t_shell *shell)
+void	global_free(t_shell *shell)
 {
 	if (shell->env)
 		tab_free(shell->env);

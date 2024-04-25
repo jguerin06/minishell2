@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouaza <mbouaza@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:34:39 by mbouaza           #+#    #+#             */
-/*   Updated: 2023/11/14 03:31:10 by mbouaza          ###   ########.fr       */
+/*   Updated: 2024/04/25 08:20:43 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int update_sd(char c, int *in_q, int *qs, int *qd)
+static int	update_sd(char c, int *in_q, int *qs, int *qd)
 {
 	if (c == '\'' && *in_q != 2)
 	{
@@ -29,11 +29,11 @@ static int update_sd(char c, int *in_q, int *qs, int *qd)
 	return (0);
 }
 
-static int quoted_size(char *line)
+static int	quoted_size(char *line)
 {
-	int i;
-	int in_q;
-	int len;
+	int	i;
+	int	in_q;
+	int	len;
 
 	i = -1;
 	len = 0;
@@ -80,12 +80,12 @@ int	check_quote(char *s)
 	return (1);
 }
 
-char *quoted_line(char *line)
+char	*quoted_line(char *line)
 {
-	char *new;
-	int in_q;
-	int i;
-	int j;
+	char	*new;
+	int		in_q;
+	int		i;
+	int		j;
 
 	((void)0, i = quoted_size(line), j = 0, new = NULL, in_q = 0);
 	new = malloc(sizeof(char) * (i + 1));

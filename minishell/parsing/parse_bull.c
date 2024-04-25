@@ -14,7 +14,8 @@
 
 int	isnt_bull(t_shell *shell, char **cmd, int i)
 {
-	if (!ft_strcmp(cmd[0], "cd") || !ft_strcmp(cmd[0], "exit"))
+	if (!ft_strcmp(cmd[0], "cd") || !ft_strcmp(cmd[0], "exit")
+		|| !ft_strcmp(cmd[0], "export") || !ft_strcmp(cmd[0], "unset"))
 		return (-1);
 	return (1);
 }
@@ -36,7 +37,7 @@ void	find_bull(t_shell *shell, char **cmd, int i)
 	else if (!ft_strcmp(cmd[0], "export"))
 		ft_export(cmd, shell->env, shell);
 	else if (!ft_strcmp(cmd[0], "unset"))
-		printf("unset\n");
+		ft_unset(cmd, shell->env, shell);
 	else
 		shell_execve(shell->cmd[i], shell->env, shell);
 	if (shell->forked_cmd == 1)

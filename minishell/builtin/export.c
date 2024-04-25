@@ -6,46 +6,51 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:26:51 by jguerin           #+#    #+#             */
-/*   Updated: 2024/03/16 14:38:19 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/04/24 16:59:44 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-
-/*
-Return error if :
-- arg start with a number
-- arg doesnt contain a letter or a number
-- arg doesnt contain an equal sign
-*/
-/*
-int	format_check(char *arg)
+int	char_cmp(char *str, char *reject)
 {
-	int current;
-	int has_equal;
-	
-	current = 0;
-	has_equal = 0;
-	if (!ft_isalpha(arg[0]))
-		printf("Pas de lettre :(\n");
-	while(arg[current])
-	{
-		if (arg[current] == '=')
-			has_equal = 1;
-		else if (!ft_isalnum(arg[current]) && arg[current] != '_')
-			if (!has_equal)
-				printf("");
-	}
-}
-*/
+	int	i;
+	int	j;
 
-/*
-	Parse the current string (an arg) and add it to shell->env
-	Return 0 on malloc error
-	Return 1 on succeed
-	Return 2 on command error (bad syntax, etc.)
-*/
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (reject[j])
+		{
+			if (str[i] == reject[j])
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+static int	format_check(char *arg, t_shell *shell)
+{
+	int	current;
+	int	flag;
+
+	current = 0;
+	flag = 0;
+	while (arg[current] && arg[current] != '=')
+	{
+		if (!ft_isalpha(arg[current]) || is_d(arg[current]))
+			flag = 1;
+		current++;
+	}
+	if (flag == 0 && char_cmp(arg, "=") == 1)
+		return (0);
+	else if (flag == 1)
+		return (1);
+}
 
 static int	env_len(char **tab)
 {
@@ -57,22 +62,63 @@ static int	env_len(char **tab)
 	return (i);
 }
 
-void	ft_export(char **cmd, char **argv, t_shell *shell)
+static char	**add_env(char **env, char *var)
 {
-	int i = 0;
-	int j = 1;
+	int		i;
+	char	**new;
 
-	// sort_env(shell->env, env_len(shell->env));
-	i = ft_checkenv(cmd[j], shell->env);
-	printf("%d\n", i);
-	if (i >= 0)
+	i = 0;
+	new = malloc(sizeof(char *) * (env_len(env) + 2));
+	while (env[i])
 	{
-		//printf("%s\n", shell->env[i]);
-		free(shell->env[i]);
-		shell->env[i] = ft_strdup(cmd[j]);
-		//printf("%s\n", shell->env[i]);
-
+		new[i] = ft_strdup(env[i]);
+		i++;
 	}
-
+	new[i++] = ft_strdup(var);
+	new[i] = NULL;
+	return (new);
 }
 
+void	ft_export(char **cmd, char **argv, t_shell *shell)
+{
+	char	**cpy;
+	int		i;
+	int		j;
+	int		flag;
+
+	i = 0;
+	j = 1;
+	flag = 0;
+	if (shell->argc == 1)
+		return (sort_env(argv, env_len(argv)));
+	while (cmd[j])
+	{
+		i = ft_checkenv(cmd[j], shell->env);
+		if (i >= 0 && format_check(cmd[j], shell) == 0)
+		{
+			free(shell->env[i]);
+			shell->env[i] = ft_strdup(cmd[j]);
+			shell->status = 0;
+		}
+		else if (i == -1 && format_check(cmd[j], shell) == 0)
+		{
+			cpy = ft_tabdup(shell->env);
+			tab_free(shell->env);
+			shell->env = add_env(cpy, cmd[j]);
+			tab_free(cpy);
+			shell->status = 0;
+		}
+		else if (format_check(cmd[j], shell) == 1)
+			flag = 1;
+		j++;
+	}
+	if (flag == 1)
+	{
+		shell->status = 1;
+		printf("Minishell : invalid identifier\n");
+	}
+}
+
+/*	1er if : var d'env existe et aucune erreur de format
+	else if : var d'env n'existe pas et aucune erreur de format
+	2eme else if : erreur de format*/

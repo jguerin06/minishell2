@@ -12,7 +12,7 @@
 
 #include "../include/minishell.h"
 
-void redir(t_shell *shell, char **cmds)
+void	redir(t_shell *shell, char **cmds)
 {
-    print_tab(cmds);
+	print_tab(cmds);
 }
